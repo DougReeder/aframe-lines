@@ -1,0 +1,27 @@
+{
+  "name": "aframe-lines",
+  "version": "0.1.0",
+  "description": "A component and primitive to draw a series of lines, for A-Frame WebXR.  Similar to the line primitive, but draws multiple lines.",
+  "main": "lines.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DougReeder/aframe-lines.git"
+  },
+  "keywords": [
+    "lines",
+    "aframe-component",
+    "aframe",
+    "webxr",
+    "webvr",
+    "vr"
+  ],
+  "author": "Doug Reeder <reeder.29@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DougReeder/aframe-lines/issues"
+  },
+  "homepage": "https://github.com/DougReeder/aframe-lines#readme"
+}

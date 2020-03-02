@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A-Frame lines primitive example</title>
+    <meta name="description" content="An example A-Frame WebVR scene with some lines">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
+    <script src="lines.js"></script>
+</head>
+<body>
+<a-scene background="color:#87cefa">
+    <a-simple-sun-sky sun-position="0.8 0.6 0"></a-simple-sun-sky>
+    <a-entity light="type: ambient; color: #888"></a-entity>
+    <a-entity id="directional" light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
+
+    <a-lines position="3 0 -5" points="-1 0 0, 0 1 0, 1 0 0" color="green" log="true"></a-lines>
+    <a-entity position="-3 0 -5" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red; log:true"></a-entity>
+</a-scene>
+</body>
+</html>
