@@ -24,23 +24,39 @@ AFRAME.registerComponent('lines', {
 
     const material = new THREE.LineBasicMaterial( { color: data.color } );
 
-    const points = [];
-    data.points.forEach(point => {
-      // console.log("point:“", point, "”");
-      const coordStr = point.split(/\s+/, 3);
-      // console.log("coordStr:“", coordStr[0], coordStr[1], coordStr[2], "”");
-      const coord = coordStr.map(c => parseFloat(c));
-      if (this.data.log) {
-        console.log("coord:“", coord[0], coord[1], coord[2], "”");
-      }
-      points.push(new THREE.Vector3(coord[0], coord[1], coord[2]));
-    });
+    const points = this.parse(data.points);
+    if (this.data.log) {
+      console.log(`${points.length} points`);
+    }
 
     const geometry = new THREE.BufferGeometry().setFromPoints( points );
 
     const line = new THREE.Line( geometry, material );
 
     el.setObject3D('lines', line);
+  },
+
+  parse: function (dataPoints) {
+    const points = [];
+    dataPoints.forEach(point => {
+      const coordStr = point.split(/\s+/, 3);
+      const coord = coordStr.map(cStr => {
+        const c = parseFloat(cStr);
+        return Number.isFinite(c) ? c : 0;
+      });
+      switch (coord.length) {
+        case 0:
+          coord[0] = 0;
+          // falls through
+        case 1:
+          coord[1] = 0;
+          // falls through
+        case 2:
+          coord[2] = 0;
+      }
+      points.push(new THREE.Vector3(coord[0], coord[1], coord[2]));
+    });
+    return points;
   },
 
   /** Called when a component is removed (e.g., via removeAttribute). */

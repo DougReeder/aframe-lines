@@ -36,3 +36,13 @@ A line is drawn from the first point to the second, the second to the third, and
 ### color
 * default: black
 
+Development
+---
+`npm install`
+
+edit files
+
+`npm test`
+
+All unit tests must pass before a pull request can be accepted.
+To the extent possible, code that does not use AFRAME, THREE or the browser should be refactored into pure JavaScript functions, and unit tests written for those functions.

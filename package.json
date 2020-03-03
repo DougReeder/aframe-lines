@@ -1,10 +1,10 @@
 {
   "name": "aframe-lines",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A component and primitive to draw a series of lines, for A-Frame WebXR.  Similar to the line primitive, but draws multiple lines.",
   "main": "lines.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/DougReeder/aframe-lines/issues"
   },
-  "homepage": "https://github.com/DougReeder/aframe-lines#readme"
+  "homepage": "https://github.com/DougReeder/aframe-lines#readme",
+  "devDependencies": {
+    "jasmine": "^3.5.0"
+  }
 }
