@@ -6,6 +6,8 @@ AFRAME.registerComponent('lines', {
   schema: {
     points: {type: 'array'},
     color: {type: 'color', default: 'rgb(0, 0, 0)'},
+    opacity: {type: 'number', default: 1},
+    visible: {default: true},
     log: {type: 'boolean', default: false}
   },
 
@@ -22,7 +24,12 @@ AFRAME.registerComponent('lines', {
     const data = this.data;
     const el = this.el;
 
-    const material = new THREE.LineBasicMaterial( { color: data.color } );
+    const material = new THREE.LineBasicMaterial( {
+      color: data.color,
+      opacity: data.opacity,
+      transparent: data.opacity < 1,
+      visible: data.visible
+    } );
 
     const points = this.parse(data.points);
     if (this.data.log) {
@@ -75,6 +82,8 @@ AFRAME.registerPrimitive('a-lines', {
   mappings: {
     'points': 'lines.points',
     'color': 'lines.color',
+    'opacity': 'lines.opacity',
+    'visible': 'lines.visible',
     'log': 'lines.log'
   }
 });

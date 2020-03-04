@@ -8,6 +8,8 @@ A component and primitive to draw a connected series of lines, for [A-Frame](htt
 
 [live example scene](https://dougreeder.github.io/aframe-lines/example.html)
 
+It's usually more efficient to do a connected series of line with only one `lines` element, even if you have to draw back over some parts of some lines.
+(See example.)
 
 
 Usage
@@ -33,10 +35,19 @@ Each point is specified by three floating-point coordinates (x, y, z), separated
 
 A line is drawn from the first point to the second, the second to the third, and so on.  No line is drawn from the last point to the first - if you want that, just repeat the first point as the last.
 
-Each connected series of lines uses one draw call.
-
 ### color
 * default: black
+
+### opacity
+* default: 1.0
+
+1.0 is fully opaque.
+
+### visible
+* default: true
+
+False means the lines aren't drawn.
+
 
 Development
 ---
