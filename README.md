@@ -4,7 +4,7 @@ aframe-lines
 A component and primitive to draw a connected series of lines, for [A-Frame](https://aframe.io) [WebXR](https://immersive-web.github.io//).  Similar to the [line](https://aframe.io/docs/1.0.0/components/line.html) primitive, but draws multiple lines.
 
 
-![sample screenshot](aframe-lines-sample.png)
+![sample screenshot](lines-sample.png)
 
 [live example scene](https://dougreeder.github.io/aframe-lines/example.html)
 
