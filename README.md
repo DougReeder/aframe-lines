@@ -17,7 +17,7 @@ Usage
 
 Include using 
 ```html
-<script src="https://unpkg.com/aframe-lines/dist/aframe-lines.js"></script>
+<script src="https://unpkg.com/aframe-lines@^1.0.0/lines.js"></script>
 ```
 
 ```html
