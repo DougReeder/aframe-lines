@@ -7,18 +7,152 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
     <script src="lines.js"></script>
+    <script type="application/javascript">
+AFRAME.registerComponent('addgosper', {
+  update: function () {
+    // get the turtle
+    const pointsArr = this.gosper(4, 3);
+    const pointStrArr = [];
+    pointsArr.forEach(function (point) {
+        pointStrArr.push(point.x + " " + point.y + " " + point.z);
+    });
+    const gosperEl = document.createElement('a-lines');
+    gosperEl.setAttribute('position', '-2 0 -5');
+    gosperEl.setAttribute('points', pointStrArr.join());
+    AFRAME.scenes[0].appendChild(gosperEl);
+  },
+
+  /** Gosper curve implementation by Jos Dirksen in "Learn Three.js" */
+  gosper: function gosper(a, b) {
+
+  var turtle = [0, 0, 0];
+  var points = [];
+  var count = 0;
+
+  rg(a, b, turtle);
+
+
+  return points;
+
+  function rt(x) {
+    turtle[2] += x;
+  }
+
+  function lt(x) {
+    turtle[2] -= x;
+  }
+
+  function fd(dist) {
+    //                ctx.beginPath();
+    points.push({
+      x: turtle[0],
+      y: turtle[1],
+      z: Math.sin(count) * 5
+    });
+    //                ctx.moveTo(turtle[0], turtle[1]);
+
+    var dir = turtle[2] * (Math.PI / 180);
+    turtle[0] += Math.cos(dir) * dist;
+    turtle[1] += Math.sin(dir) * dist;
+
+    points.push({
+      x: turtle[0],
+      y: turtle[1],
+      z: Math.sin(count) * 5
+    });
+    //                ctx.lineTo(turtle[0], turtle[1]);
+    //                ctx.stroke();
+
+  }
+
+  function rg(st, ln, turtle) {
+
+    st--;
+    ln = ln / 2.6457;
+    if (st > 0) {
+      //                    ctx.strokeStyle = '#111';
+      rg(st, ln, turtle);
+      rt(60);
+      gl(st, ln, turtle);
+      rt(120);
+      gl(st, ln, turtle);
+      lt(60);
+      rg(st, ln, turtle);
+      lt(120);
+      rg(st, ln, turtle);
+      rg(st, ln, turtle);
+      lt(60);
+      gl(st, ln, turtle);
+      rt(60);
+    }
+    if (st == 0) {
+      fd(ln);
+      rt(60);
+      fd(ln);
+      rt(120);
+      fd(ln);
+      lt(60);
+      fd(ln);
+      lt(120);
+      fd(ln);
+      fd(ln);
+      lt(60);
+      fd(ln);
+      rt(60)
+    }
+  }
+
+  function gl(st, ln, turtle) {
+    st--;
+    ln = ln / 2.6457;
+    if (st > 0) {
+      //                    ctx.strokeStyle = '#555';
+      lt(60);
+      rg(st, ln, turtle);
+      rt(60);
+      gl(st, ln, turtle);
+      gl(st, ln, turtle);
+      rt(120);
+      gl(st, ln, turtle);
+      rt(60);
+      rg(st, ln, turtle);
+      lt(120);
+      rg(st, ln, turtle);
+      lt(60);
+      gl(st, ln, turtle);
+    }
+    if (st == 0) {
+      lt(60);
+      fd(ln);
+      rt(60);
+      fd(ln);
+      fd(ln);
+      rt(120);
+      fd(ln);
+      rt(60);
+      fd(ln);
+      lt(120);
+      fd(ln);
+      lt(60);
+      fd(ln);
+    }
+  }
+}
+
+});
+    </script>
 </head>
 <body>
-<a-scene background="color:#87cefa">
+<a-scene background="color:#87cefa" addgosper>
     <a-simple-sun-sky sun-position="0.8 0.6 0"></a-simple-sun-sky>
     <a-entity light="type: ambient; color: #888"></a-entity>
     <a-entity id="directional" light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
 
-    <a-lines position="1 1 -5" color="green"
+    <a-lines position="2 1 -5" color="green"
              points="-1.5 -1.5, -1.5 1.5, 1.5 1.5, 1.5 -1.5, -1.5 -1.5, -0.5 -1.5, -0.5 1.5, 0.5 1.5, 0.5 -1.5, 1.5 -1.5, 1.5 -0.5, -1.5 -0.5, -1.5 0.5, 1.5 0.5"
              opacity="0.4"
              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-lines>
-    <a-entity position="-1 0 -5" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
+    <a-entity position="0 3 -5" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
 </a-scene>
 </body>
 </html>
