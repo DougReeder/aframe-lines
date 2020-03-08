@@ -8,6 +8,49 @@
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
     <script src="lines.js"></script>
     <script type="application/javascript">
+// 3-D Hilbert curve code by "kylefinn", https://stackoverflow.com/questions/14519267/algorithm-for-generating-a-3d-hilbert-space-filling-curve-in-python
+AFRAME.registerComponent('addhilbert3', {
+    update: function () {
+      const pointStrArr = [];
+      m=0;
+      hilbertC(8, 0,0,0, 0.3,0,0, 0,0.3,0, 0,0,0.3);
+      const hilbertEl = document.createElement('a-lines');
+      hilbertEl.setAttribute('position', '0 2 -5');
+      hilbertEl.setAttribute('points', pointStrArr.join());
+      hilbertEl.setAttribute('color', 'purple');
+      AFRAME.scenes[0].appendChild(hilbertEl);
+
+      function hilbertC(s, x, y, z, dx, dy, dz, dx2, dy2, dz2, dx3, dy3, dz3)
+      {
+        if (s==1) {
+          pointStrArr.push(x + " " + y + " " + z);
+          m++;
+        } else {
+          s/=2;
+          if(dx<0) x-=s*dx;
+          if(dy<0) y-=s*dy;
+          if(dz<0) z-=s*dz;
+          if(dx2<0) x-=s*dx2;
+          if(dy2<0) y-=s*dy2;
+          if(dz2<0) z-=s*dz2;
+          if(dx3<0) x-=s*dx3;
+          if(dy3<0) y-=s*dy3;
+          if(dz3<0) z-=s*dz3;
+          hilbertC(s, x, y, z, dx2, dy2, dz2, dx3, dy3, dz3, dx, dy, dz);
+          hilbertC(s, x+s*dx, y+s*dy, z+s*dz, dx3, dy3, dz3, dx, dy, dz, dx2, dy2, dz2);
+          hilbertC(s, x+s*dx+s*dx2, y+s*dy+s*dy2, z+s*dz+s*dz2, dx3, dy3, dz3, dx, dy, dz, dx2, dy2, dz2);
+          hilbertC(s, x+s*dx2, y+s*dy2, z+s*dz2, -dx, -dy, -dz, -dx2, -dy2, -dz2, dx3, dy3, dz3);
+          hilbertC(s, x+s*dx2+s*dx3, y+s*dy2+s*dy3, z+s*dz2+s*dz3, -dx, -dy, -dz, -dx2, -dy2, -dz2, dx3, dy3, dz3);
+          hilbertC(s, x+s*dx+s*dx2+s*dx3, y+s*dy+s*dy2+s*dy3, z+s*dz+s*dz2+s*dz3, -dx3, -dy3, -dz3, dx, dy, dz, -dx2, -dy2, -dz2);
+          hilbertC(s, x+s*dx+s*dx3, y+s*dy+s*dy3, z+s*dz+s*dz3, -dx3, -dy3, -dz3, dx, dy, dz, -dx2, -dy2, -dz2);
+          hilbertC(s, x+s*dx3, y+s*dy3, z+s*dz3, dx2, dy2, dz2, -dx3, -dy3, -dz3, -dx, -dy, -dz);
+        }
+      }
+    },
+});
+    </script>
+    <script type="application/javascript">
+// Gosper curve implementation by Jos Dirksen in "Learn Three.js"
 AFRAME.registerComponent('addgosper', {
   update: function () {
     // get the turtle
@@ -17,7 +60,7 @@ AFRAME.registerComponent('addgosper', {
         pointStrArr.push(point.x + " " + point.y + " " + point.z);
     });
     const gosperEl = document.createElement('a-lines');
-    gosperEl.setAttribute('position', '-2 0 -5');
+    gosperEl.setAttribute('position', '-2 -1 -5');
     gosperEl.setAttribute('points', pointStrArr.join());
     AFRAME.scenes[0].appendChild(gosperEl);
   },
@@ -143,16 +186,16 @@ AFRAME.registerComponent('addgosper', {
     </script>
 </head>
 <body>
-<a-scene background="color:#87cefa" addgosper>
+<a-scene background="color:#87cefa" addhilbert3 addgosper>
     <a-simple-sun-sky sun-position="0.8 0.6 0"></a-simple-sun-sky>
     <a-entity light="type: ambient; color: #888"></a-entity>
     <a-entity id="directional" light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
 
-    <a-lines position="2 1 -5" color="green"
+    <a-lines position="2 0 -5" color="green"
              points="-1.5 -1.5, -1.5 1.5, 1.5 1.5, 1.5 -1.5, -1.5 -1.5, -0.5 -1.5, -0.5 1.5, 0.5 1.5, 0.5 -1.5, 1.5 -1.5, 1.5 -0.5, -1.5 -0.5, -1.5 0.5, 1.5 0.5"
              opacity="0.4"
              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-lines>
-    <a-entity position="0 3 -5" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
+    <a-entity position="-2 3 -5" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
 </a-scene>
 </body>
 </html>
