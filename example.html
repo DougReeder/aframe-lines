@@ -15,7 +15,7 @@ AFRAME.registerComponent('addhilbert3', {
       m=0;
       hilbertC(8, 0,0,0, 0.3,0,0, 0,0.3,0, 0,0,0.3);
       const hilbertEl = document.createElement('a-lines');
-      hilbertEl.setAttribute('position', '0 2 -5');
+      hilbertEl.setAttribute('position', '0 2 -4');
       hilbertEl.setAttribute('points', pointStrArr.join());
       hilbertEl.setAttribute('color', 'purple');
       AFRAME.scenes[0].appendChild(hilbertEl);
@@ -52,17 +52,39 @@ AFRAME.registerComponent('addhilbert3', {
     <script type="application/javascript">
 // Gosper curve implementation by Jos Dirksen in "Learn Three.js"
 AFRAME.registerComponent('addgosper', {
+  init: function () {
+    this.a = 1;
+    this.b = 3;
+  },
+
   update: function () {
     // get the turtle
-    const pointsArr = this.gosper(4, 3);
+    const pointsArr = this.gosper(this.a, this.b);
     const pointStrArr = [];
     pointsArr.forEach(function (point) {
         pointStrArr.push(point.x + " " + point.y + " " + point.z);
     });
-    const gosperEl = document.createElement('a-lines');
-    gosperEl.setAttribute('position', '-2 -1 -5');
-    gosperEl.setAttribute('points', pointStrArr.join());
-    AFRAME.scenes[0].appendChild(gosperEl);
+    this.gosperEl = document.createElement('a-lines');
+    this.gosperEl.setAttribute('position', '-2 -1 -4');
+    this.gosperEl.setAttribute('points', pointStrArr.join());
+    // this.gosperEl.setAttribute('log', true);
+    AFRAME.scenes[0].appendChild(this.gosperEl);
+  },
+
+  tick: function(time, timeDelta) {
+    const a = Math.round(2.5 + 1.5 * Math.sin(time / 1000 / 2 / Math.PI));
+    // The efficient way to adjust size is the scale attribute, but here
+    // we stress-test memory management by recomputing.
+    const b = 1.5 + Math.sin(time / 1000 / 2 / Math.PI);
+    // console.log("a:", a, "   b:", b);
+      this.a = a;
+      this.b = b;
+      const pointsArr = this.gosper(this.a, this.b);
+      const pointStrArr = [];
+      pointsArr.forEach(function (point) {
+        pointStrArr.push(point.x + " " + point.y + " " + point.z);
+      });
+      this.gosperEl.setAttribute('points', pointStrArr.join());
   },
 
   /** Gosper curve implementation by Jos Dirksen in "Learn Three.js" */
@@ -191,11 +213,11 @@ AFRAME.registerComponent('addgosper', {
     <a-entity light="type: ambient; color: #888"></a-entity>
     <a-entity id="directional" light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
 
-    <a-lines position="2 0 -5" color="green"
+    <a-lines position="2 0 -4" color="green"
              points="-1.5 -1.5, -1.5 1.5, 1.5 1.5, 1.5 -1.5, -1.5 -1.5, -0.5 -1.5, -0.5 1.5, 0.5 1.5, 0.5 -1.5, 1.5 -1.5, 1.5 -0.5, -1.5 -0.5, -1.5 0.5, 1.5 0.5"
              opacity="0.4"
              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-lines>
-    <a-entity position="-2 3 -5" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
+    <a-entity position="-2 3 -4" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
 </a-scene>
 </body>
 </html>

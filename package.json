@@ -1,6 +1,6 @@
 {
   "name": "aframe-lines",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A component and primitive to draw a series of lines, for A-Frame WebXR.  Similar to the line primitive, but draws multiple lines.",
   "main": "lines.js",
   "scripts": {

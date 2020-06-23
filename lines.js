@@ -13,6 +13,9 @@ AFRAME.registerComponent('lines', {
 
   /** Called once when component is attached. Generally for initial setup. */
   init: function () {
+    this.material = new THREE.LineBasicMaterial();
+    this.geometry = new THREE.BufferGeometry();
+    this.line = new THREE.Line( this.geometry, this.material );
   },
 
   /** Called when properties are changed, incl. right after init */
@@ -24,7 +27,7 @@ AFRAME.registerComponent('lines', {
     const data = this.data;
     const el = this.el;
 
-    const material = new THREE.LineBasicMaterial( {
+    this.material.setValues( {
       color: data.color,
       opacity: data.opacity,
       transparent: data.opacity < 1,
@@ -36,11 +39,9 @@ AFRAME.registerComponent('lines', {
       console.log(`${points.length} points`);
     }
 
-    const geometry = new THREE.BufferGeometry().setFromPoints( points );
+    this.geometry.setFromPoints( points );
 
-    const line = new THREE.Line( geometry, material );
-
-    el.setObject3D('lines', line);
+    el.setObject3D('lines', this.line);
   },
 
   parse: function (dataPoints) {

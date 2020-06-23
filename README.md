@@ -31,7 +31,7 @@ Parameters
 
 ### points
 
-Each point is specified by three floating-point coordinates (x, y, z), separated by one or more spaces.  Points are separated by commas. Zero is used for missing coordinates.
+Each point is specified by three floating-point coordinates (x, y, z), separated by one or more spaces.  Points are separated by commas. Missing coordinates are replaced with zero.
 
 A line is drawn from the first point to the second, the second to the third, and so on.  No line is drawn from the last point to the first - if you want that, just repeat the first point as the last.
 
