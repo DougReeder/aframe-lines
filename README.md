@@ -8,16 +8,18 @@ A component and primitive to draw a connected series of lines, for [A-Frame](htt
 
 [live example scene](https://dougreeder.github.io/aframe-lines/example.html)
 
-It's usually more efficient to do a connected series of line with only one `lines` element, even if you have to draw back over some parts of some lines.
-(See example.)
+It's usually more efficient to do a connected series of lines with only one `lines` component, even if you have to draw back over some parts of some lines.
+(See the green grid in the example.)
 
+A disconnected series of lines can be created by setting multiple `lines__foo` components on a single `a-entity`.
+See the red and pink X in the example.
 
 Usage
 -----
 
 Include using 
 ```html
-<script src="https://unpkg.com/aframe-lines@^1.0.0/lines.js"></script>
+<script src="https://unpkg.com/aframe-lines@^1.1.0/lines.js"></script>
 ```
 
 ```html

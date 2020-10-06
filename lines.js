@@ -11,6 +11,8 @@ AFRAME.registerComponent('lines', {
     log: {type: 'boolean', default: false}
   },
 
+  multiple: true,
+
   /** Called once when component is attached. Generally for initial setup. */
   init: function () {
     this.material = new THREE.LineBasicMaterial();
@@ -41,7 +43,7 @@ AFRAME.registerComponent('lines', {
 
     this.geometry.setFromPoints( points );
 
-    el.setObject3D('lines', this.line);
+    el.setObject3D(this.attrName, this.line);
   },
 
   parse: function (dataPoints) {
@@ -69,7 +71,7 @@ AFRAME.registerComponent('lines', {
 
   /** Called when a component is removed (e.g., via removeAttribute). */
   remove: function () {
-    this.el.removeObject3D('lines');
+    this.el.removeObject3D(this.attrName);
   }
 
 });

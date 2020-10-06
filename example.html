@@ -217,7 +217,8 @@ AFRAME.registerComponent('addgosper', {
              points="-1.5 -1.5, -1.5 1.5, 1.5 1.5, 1.5 -1.5, -1.5 -1.5, -0.5 -1.5, -0.5 1.5, 0.5 1.5, 0.5 -1.5, 1.5 -1.5, 1.5 -0.5, -1.5 -0.5, -1.5 0.5, 1.5 0.5"
              opacity="0.4"
              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-lines>
-    <a-entity position="-2 3 -4" lines="points: -1 1 0, 0 0 0, 1 1 0; color:red;"></a-entity>
+    <a-entity position="-2 3 -4" lines__upper="points: -1 1 0, 0 0 0, 1 1 0; color:red;"
+              lines__lower="points: -1 -1.1 0, 0 -0.1 0, 1 -1.1 0; color:pink;"></a-entity>
 </a-scene>
 </body>
 </html>
