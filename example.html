@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>A-Frame lines primitive example</title>
     <meta name="description" content="An example A-Frame WebVR scene with some lines">
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <script src="lines.js"></script>
     <script type="application/javascript">
 // 3-D Hilbert curve code by "kylefinn", https://stackoverflow.com/questions/14519267/algorithm-for-generating-a-3d-hilbert-space-filling-curve-in-python
@@ -213,7 +213,7 @@ AFRAME.registerComponent('addgosper', {
     <a-entity light="type: ambient; color: #888"></a-entity>
     <a-entity id="directional" light="type: directional; color: #FFF; intensity: 0.6" position="0.7 0.4 -1"></a-entity>
 
-    <a-lines position="2 0 -4" color="green"
+    <a-lines position="2 0 -4" color="yellow"
              points="-1.5 -1.5, -1.5 1.5, 1.5 1.5, 1.5 -1.5, -1.5 -1.5, -0.5 -1.5, -0.5 1.5, 0.5 1.5, 0.5 -1.5, 1.5 -1.5, 1.5 -0.5, -1.5 -0.5, -1.5 0.5, 1.5 0.5"
              opacity="0.4"
              animation="property: rotation; to: 0 360 0; loop: true; dur: 5000"></a-lines>
